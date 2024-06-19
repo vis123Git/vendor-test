@@ -37,7 +37,7 @@ exports.get_vendors = async (req, res) => {
         return res.status(400).json({ status: false, message: "Vendors not found!!"})
       }
 
-      const fetchUser = await VendorUsers.find()
+      const fetchUser = await VendorUsers.find({VendorOrganizationId : {$in : getUniqueSups}, Role : "Admin"})
       console.log("fetchUser==",fetchUser);
       if(!fetchUser?.length){
         return res.status(400).json({ status: false, message: "Users not found!!"})
